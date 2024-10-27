@@ -15,6 +15,7 @@ app.use(require("./routes"));
 app.use(require("./routes/auth"));
 app.use(require("./routes/cliente"));
 app.use(require("./routes/producto"));
+app.use(require("./routes/imagenes"));
 
 //server
 app.listen(app.get("port"), () => {
