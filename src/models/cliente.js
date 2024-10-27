@@ -1,8 +1,9 @@
-const con = require('../db/mysql');
+const conection = require('../db/mysql');
 
 var cliente = {}
 
 cliente.getCliente = (callback) => {
+    con = conection.conMysql();
     if(con){
         con.query('SELECT * FROM cliente', (error,rows) => {
             if(error){
@@ -10,11 +11,13 @@ cliente.getCliente = (callback) => {
             }else{
                 callback(null,rows);
             }
+            conection.cerrarConexion();
         });
     }
 }
 
 cliente.getClienteById = (id,callback) => {
+    con = conection.conMysql();
     if(con){
         const _id = con.escape(id);
         var sql = 'SELECT * FROM cliente WHERE cliente_id = '+_id;
@@ -24,11 +27,13 @@ cliente.getClienteById = (id,callback) => {
             }else{
                 callback(null,rows);
             }
+            conection.cerrarConexion();
         });
     }
 }
 
 cliente.getClienteLogin = (dataLogin,callback) => {
+    con = conection.conMysql();
     if(con){
         const _correo = con.escape(dataLogin.correo);
         const _contraseña = con.escape(dataLogin.contraseña);
@@ -39,12 +44,13 @@ cliente.getClienteLogin = (dataLogin,callback) => {
             }else{
                 callback(null,rows);
             }
+            conection.cerrarConexion();
         });
     }
 }
 
-cliente.insertCliente = function(clienteData,callback)
-{
+cliente.insertCliente = (clienteData,callback) => {
+    con = conection.conMysql();
 	if (con) 
 	{
 		con.query('INSERT INTO cliente SET ?', clienteData, (error, result) => {
@@ -53,6 +59,7 @@ cliente.insertCliente = function(clienteData,callback)
 			}else{
 				callback(null, {"mensaje":"Cliente insertado"});
 			}
+            conection.cerrarConexion();
 		});
 	}
 }
@@ -65,6 +72,8 @@ cliente.updateCliente = (id,datosCliente,callback) => {
     const _telefono = con.escape(datosCliente.telefono);
     const _correo = con.escape(datosCliente.correo);
     const _contraseña = con.escape(datosCliente.contraseña);
+
+    con = conection.conMysql();
     if(con){
         var sql = `UPDATE cliente SET nombres=${_nombres}, apellidos=${_apellidos}, direccion=${_direccion}, telefono=${_telefono}, correo=${_correo}, contraseña=${_contraseña} WHERE cliente_id=${_id}`;
         con.query(sql, (error,rows) => {
@@ -73,11 +82,14 @@ cliente.updateCliente = (id,datosCliente,callback) => {
             }else{
                 callback(null,{"mensaje":"Actualizado"});
             }
+            conection.cerrarConexion();
         });
     }
 }
 
 cliente.deleteCliente = (id,callback) => {
+
+    con = conection.conMysql();
     if(con){
         const _id = con.escape(id);
         var sql = 'DELETE FROM cliente WHERE cliente_id = '+_id;
@@ -87,8 +99,10 @@ cliente.deleteCliente = (id,callback) => {
             }else{
                 callback(null,{"mesaje":"Borrado"});
             }
+            conection.cerrarConexion();
         });
     }
 }
+
 
 module.exports = cliente;

@@ -1,5 +1,4 @@
 const mysql = require('mysql');
-
 require('dotenv').config();
 
 const dbconfig = {
@@ -7,32 +6,43 @@ const dbconfig = {
     user: process.env.MYSQL_ADDON_USER,
     password: process.env.MYSQL_ADDON_PASSWORD,
     database: process.env.MYSQL_ADDON_DB
-}
-
+};
 
 let conexion;
 
-function conMysql(){
+function conMysql() {
     conexion = mysql.createConnection(dbconfig);
 
-    conexion.connect((err)=>{
-        if(err){
+    conexion.connect((err) => {
+        if (err) {
             console.log('[db err]', err);
-        }else{
-            console.log('DB CONECTADA!!')
+        } else {
+            console.log('DB CONECTADA!!');
         }
     });
 
     conexion.on('error', err => {
-        console.log('[db err]',err);
-        if(err.code === 'PROTOCOL_CONNECTION_LOST'){
+        console.log('[db err]', err);
+        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
             conMysql();
-        }else{
+        } else {
             throw err;
         }
     });
+
+    return conexion;
 }
 
-conMysql();
+function cerrarConexion() {
+    if (conexion) {
+        conexion.end((err) => {
+            if (err) {
+                console.log('[db err] Error al cerrar la conexión:', err);
+            } else {
+                console.log('Conexión cerrada exitosamente.');
+            }
+        });
+    }
+}
 
-module.exports = conexion;
+module.exports = { conMysql, cerrarConexion };

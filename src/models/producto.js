@@ -1,8 +1,10 @@
-const con = require('../db/mysql');
+const conection = require('../db/mysql');
+
 
 var producto = {}
 
 producto.getProducto = (callback) => {
+    con = conection.conMysql();
     if(con){
         con.query('SELECT * FROM producto', (error,rows) => {
             if(error){
@@ -10,6 +12,7 @@ producto.getProducto = (callback) => {
             }else{
                 callback(null,rows);
             }
+            conection.cerrarConexion();
         });
     }
 }
