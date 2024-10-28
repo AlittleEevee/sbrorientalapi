@@ -34,7 +34,7 @@ router.post("/cliente", async (req,res) =>{
         apellidos: req.body.apellidos,
         direccion: req.body.direccion,
         telefono: req.body.telefono,
-        correo: req.body.telefono,
+        correo: req.body.correo,
         contraseña: req.body.contraseña
     }
 
@@ -51,7 +51,7 @@ router.put("/cliente/:id", async (req,res) =>{
         apellidos: req.body.apellidos,
         direccion: req.body.direccion,
         telefono: req.body.telefono,
-        correo: req.body.telefono,
+        correo: req.body.correo,
         contraseña: req.body.contraseña
     }
 

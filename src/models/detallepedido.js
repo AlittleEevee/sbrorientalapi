@@ -1,12 +1,12 @@
 const conection = require('../db/mysql');
 
 
-var producto = {}
+var detallepedido = {}
 
-producto.getProducto = (callback) => {
+detallepedido.getDetallepedido = (callback) => {
     con = conection.conMysql();
     if(con){
-        con.query('SELECT * FROM producto', (error,rows) => {
+        con.query('SELECT * FROM detallepedido', (error,rows) => {
             if(error){
                 throw error;
             }else{
@@ -17,11 +17,11 @@ producto.getProducto = (callback) => {
     }
 }
 
-producto.getProductoById = (id,callback) => {
+detallepedido.getDetallepedidoById = (id,callback) => {
     con = conection.conMysql();
     if(con){
         const _id = con.escape(id);
-        var sql = 'SELECT * FROM producto WHERE producto_id = '+_id;
+        var sql = 'SELECT * FROM detallepedido WHERE detallepedido_id = '+_id;
         con.query(sql, (error,rows) => {
             if(error){
                 throw error;
@@ -33,31 +33,31 @@ producto.getProductoById = (id,callback) => {
     }
 }
 
-producto.insertProducto = (productoData,callback) => {
+detallepedido.insertDetallepedido = (detallepedidoData,callback) => {
     con = conection.conMysql();
 	if (con) 
 	{
-		con.query('INSERT INTO producto SET ?', productoData, (error, result) => {
+		con.query('INSERT INTO detallepedido SET ?', detallepedidoData, (error, result) => {
 			if(error){
 				throw error;
 			}else{
-				callback(null, {"mensaje":"producto insertado"});
+				callback(null, {"mensaje":"detallepedido insertado"});
 			}
             conection.cerrarConexion();
 		});
 	}
 }
 
-producto.updateProducto = (id,datosProducto,callback) => {
+detallepedido.updateDetallepedido = (id,datosDetallepedido,callback) => {
     const _id = con.escape(id);
-    const _descripcion = con.escape(datosProducto.descripcion);
-    const _precio = con.escape(datosProducto.precio);
-    const _categoria_id = con.escape(datosProducto.categoria_id);
-    const _imagenes = con.escape(datosProducto.imagenes);
+    const _pedido_id = con.escape(datosDetallepedido.pedido_id);
+    const _producto_id = con.escape(datosDetallepedido.producto_id);
+    const _cantidad = con.escape(datosDetallepedido.cantidad);
+    const _precio_unitario = con.escape(datosDetallepedido.precio_unitario);
 
     con = conection.conMysql();
     if(con){
-        var sql = `UPDATE producto SET descripcion=${_descripcion}, precio=${_precio}, categoria_id=${_categoria_id}, imagenes=${_imagenes} WHERE producto_id=${_id}`;
+        var sql = `UPDATE detallepedido SET pedido_id=${_pedido_id}, producto_id=${_producto_id}, cantidad=${_cantidad}, precio_unitario=${_precio_unitario} WHERE detallepedido_id=${_id}`;
         con.query(sql, (error,rows) => {
             if(error){
                 throw error;
@@ -69,12 +69,12 @@ producto.updateProducto = (id,datosProducto,callback) => {
     }
 }
 
-producto.deleteProducto = (id,callback) => {
+detallepedido.deleteDetallepedido = (id,callback) => {
 
     con = conection.conMysql();
     if(con){
         const _id = con.escape(id);
-        var sql = 'DELETE FROM producto WHERE producto_id = '+_id;
+        var sql = 'DELETE FROM detallepedido WHERE detallepedido_id = '+_id;
         con.query(sql, (error,rows) => {
             if(error){
                 throw error;
@@ -86,4 +86,4 @@ producto.deleteProducto = (id,callback) => {
     }
 }
 
-module.exports = producto;
+module.exports = detallepedido;

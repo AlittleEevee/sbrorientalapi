@@ -68,7 +68,7 @@ cliente.updateCliente = (id,datosCliente,callback) => {
     const _id = con.escape(id);
     const _nombres = con.escape(datosCliente.nombres);
     const _apellidos = con.escape(datosCliente.apellidos);
-    const _direccion = con.escape(datosCliente.telefono);
+    const _direccion = con.escape(datosCliente.direccion);
     const _telefono = con.escape(datosCliente.telefono);
     const _correo = con.escape(datosCliente.correo);
     const _contraseña = con.escape(datosCliente.contraseña);

@@ -6,7 +6,7 @@ const router = Router();
 
 router.get('/img/:id', (req, res) => {
     const { id } = req.params;
-    const rutaImagen = path.join(__dirname, '../img', `${id}.png`);
+    const rutaImagen = path.join(__dirname, '../img', `${id}`);
     res.sendFile(rutaImagen);
 });
 
