@@ -9,7 +9,11 @@ cliente.getCliente = (callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,rows);
+                res = {
+                    status:"success",
+                    data:rows
+                }
+                callback(null,res);
             }
             conection.cerrarConexion();
         });
@@ -25,7 +29,11 @@ cliente.getClienteById = (id,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,rows);
+                res = {
+                    status:"success",
+                    data:rows
+                }
+                callback(null,res);
             }
             conection.cerrarConexion();
         });
@@ -42,7 +50,11 @@ cliente.getClienteLogin = (dataLogin,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,rows);
+                res = {
+                    status:"success",
+                    data:rows
+                }
+                callback(null,res);
             }
             conection.cerrarConexion();
         });
@@ -57,7 +69,7 @@ cliente.insertCliente = (clienteData,callback) => {
 			if(error){
 				throw error;
 			}else{
-				callback(null, {"mensaje":"Cliente insertado"});
+				callback(null, {status:"success"});
 			}
             conection.cerrarConexion();
 		});
@@ -80,7 +92,7 @@ cliente.updateCliente = (id,datosCliente,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,{"mensaje":"Actualizado"});
+                callback(null, {status:"success"});
             }
             conection.cerrarConexion();
         });
@@ -97,7 +109,7 @@ cliente.deleteCliente = (id,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,{"mesaje":"Borrado"});
+                callback(null, {status:"success"});
             }
             conection.cerrarConexion();
         });

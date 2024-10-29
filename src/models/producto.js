@@ -10,7 +10,11 @@ producto.getProducto = (callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,rows);
+                res = {
+                    status:"success",
+                    data:rows
+                }
+                callback(null,res);
             }
             conection.cerrarConexion();
         });
@@ -26,7 +30,11 @@ producto.getProductoById = (id,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,rows);
+                res = {
+                    status:"success",
+                    data:rows
+                }
+                callback(null,res);
             }
             conection.cerrarConexion();
         });
@@ -41,7 +49,7 @@ producto.insertProducto = (productoData,callback) => {
 			if(error){
 				throw error;
 			}else{
-				callback(null, {"mensaje":"producto insertado"});
+				callback(null, {status:"success"});
 			}
             conection.cerrarConexion();
 		});
@@ -62,7 +70,7 @@ producto.updateProducto = (id,datosProducto,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,{"mensaje":"Actualizado"});
+                callback(null, {status:"success"});
             }
             conection.cerrarConexion();
         });
@@ -79,7 +87,7 @@ producto.deleteProducto = (id,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,{"mesaje":"Borrado"});
+                callback(null, {status:"success"});
             }
             conection.cerrarConexion();
         });

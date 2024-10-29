@@ -10,7 +10,11 @@ categoria.getCategoria = (callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,rows);
+                res = {
+                    status:"success",
+                    data:rows
+                }
+                callback(null,res);
             }
             conection.cerrarConexion();
         });
@@ -26,7 +30,11 @@ categoria.getCategoriaById = (id,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,rows);
+                res = {
+                    status:"success",
+                    data:rows
+                }
+                callback(null,res);
             }
             conection.cerrarConexion();
         });
@@ -41,7 +49,7 @@ categoria.insertCategoria = (categoriaData,callback) => {
 			if(error){
 				throw error;
 			}else{
-				callback(null, {"mensaje":"categoria insertado"});
+				callback(null, {status:"success"});
 			}
             conection.cerrarConexion();
 		});
@@ -59,7 +67,7 @@ categoria.updateCategoria = (id,datosCategoria,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,{"mensaje":"Actualizado"});
+                callback(null, {status:"success"});
             }
             conection.cerrarConexion();
         });
@@ -76,7 +84,7 @@ categoria.deleteCategoria = (id,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,{"mesaje":"Borrado"});
+                callback(null, {status:"success"});
             }
             conection.cerrarConexion();
         });

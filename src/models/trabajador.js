@@ -9,7 +9,11 @@ trabajador.getTrabajador = (callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,rows);
+                res = {
+                    status:"success",
+                    data:rows
+                }
+                callback(null,res);
             }
             conection.cerrarConexion();
         });
@@ -25,7 +29,11 @@ trabajador.getTrabajadorById = (id,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,rows);
+                res = {
+                    status:"success",
+                    data:rows
+                }
+                callback(null,res);
             }
             conection.cerrarConexion();
         });
@@ -40,7 +48,7 @@ trabajador.insertTrabajador = (trabajadorData,callback) => {
 			if(error){
 				throw error;
 			}else{
-				callback(null, {"mensaje":"Trabajador insertado"});
+				callback(null, {status:"success"});
 			}
             conection.cerrarConexion();
 		});
@@ -61,7 +69,7 @@ trabajador.updateTrabajador = (id,datosTrabajador,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,{"mensaje":"Actualizado"});
+                callback(null, {status:"success"});
             }
             conection.cerrarConexion();
         });
@@ -78,7 +86,7 @@ trabajador.deleteTrabajador = (id,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,{"mesaje":"Borrado"});
+                callback(null, {status:"success"});
             }
             conection.cerrarConexion();
         });

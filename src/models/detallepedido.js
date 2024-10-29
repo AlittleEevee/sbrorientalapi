@@ -10,7 +10,11 @@ detallepedido.getDetallepedido = (callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,rows);
+                res = {
+                    status:"success",
+                    data:rows
+                }
+                callback(null,res);
             }
             conection.cerrarConexion();
         });
@@ -26,7 +30,11 @@ detallepedido.getDetallepedidoById = (id,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,rows);
+                res = {
+                    status:"success",
+                    data:rows
+                }
+                callback(null,res);
             }
             conection.cerrarConexion();
         });
@@ -41,7 +49,7 @@ detallepedido.insertDetallepedido = (detallepedidoData,callback) => {
 			if(error){
 				throw error;
 			}else{
-				callback(null, {"mensaje":"detallepedido insertado"});
+				callback(null, {status:"success"});
 			}
             conection.cerrarConexion();
 		});
@@ -62,7 +70,7 @@ detallepedido.updateDetallepedido = (id,datosDetallepedido,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,{"mensaje":"Actualizado"});
+                callback(null, {status:"success"});
             }
             conection.cerrarConexion();
         });
@@ -79,7 +87,7 @@ detallepedido.deleteDetallepedido = (id,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,{"mesaje":"Borrado"});
+                callback(null, {status:"success"});
             }
             conection.cerrarConexion();
         });

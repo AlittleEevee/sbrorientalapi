@@ -10,7 +10,11 @@ pedido.getPedido = (callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,rows);
+                res = {
+                    status:"success",
+                    data:rows
+                }
+                callback(null,res);;
             }
             conection.cerrarConexion();
         });
@@ -26,7 +30,11 @@ pedido.getPedidoById = (id,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,rows);
+                res = {
+                    status:"success",
+                    data:rows
+                }
+                callback(null,res);
             }
             conection.cerrarConexion();
         });
@@ -41,7 +49,7 @@ pedido.insertPedido = (pedidoData,callback) => {
 			if(error){
 				throw error;
 			}else{
-				callback(null, {"mensaje":"pedido insertado"});
+				callback(null, {status:"success"});
 			}
             conection.cerrarConexion();
 		});
@@ -67,7 +75,7 @@ pedido.updatePedido = (id,datosPedido,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,{"mensaje":"Actualizado"});
+                callback(null, {status:"success"});
             }
             conection.cerrarConexion();
         });
@@ -84,7 +92,7 @@ pedido.deletePedido = (id,callback) => {
             if(error){
                 throw error;
             }else{
-                callback(null,{"mesaje":"Borrado"});
+                callback(null, {status:"success"});
             }
             conection.cerrarConexion();
         });
