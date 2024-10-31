@@ -10,7 +10,7 @@ router.get("/cliente", async (req,res) =>{
     })
 });
 
-router.get("/login", async (req,res) =>{
+router.post("/login", async (req,res) =>{
     loginData = {
         correo: req.body.correo,
         contraseña: req.body.contraseña
