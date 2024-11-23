@@ -45,13 +45,20 @@ pedido.insertPedido = (pedidoData,callback) => {
     con = conection.conMysql();
 	if (con) 
 	{
-		con.query('INSERT INTO pedido SET ?', pedidoData, (error, result) => {
+		con.query('call add_pedido ( ?,?,?,?,?,?, @nuevo_pedido_id )', [pedidoData.cliente_id ,pedidoData.forma_pago, pedidoData.ubicacion_entrega, pedidoData.tipo_entrega, pedidoData.precio_total, pedidoData.estado_entrega], (error, result) => {
 			if(error){
 				throw error;
 			}else{
-				callback(null, {status:"success"});
+                con.query('SELECT @nuevo_pedido_id AS pedido_id', (error, result) => {
+                    if (error) {
+                        throw error; // Manejo de errores en la segunda consulta
+                    } else {
+                        // Devuelve el ID al callback
+                        callback(null, { status: "success", data: result});
+                    }
+                    conection.cerrarConexion(); // Cierra la conexión
+                });
 			}
-            conection.cerrarConexion();
 		});
 	}
 }

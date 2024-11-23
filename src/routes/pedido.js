@@ -21,14 +21,11 @@ router.post("/pedido", async (req,res) =>{
 
     pedidoData = {
         cliente_id: req.body.cliente_id,
-        trabajador_id: req.body.trabajador_id,
         forma_pago: req.body.forma_pago,
         ubicacion_entrega: req.body.ubicacion_entrega,
         tipo_entrega: req.body.tipo_entrega,
         precio_total: req.body.precio_total,
-        estado_entrega: req.body.estado_entrega,
-        fecha_pedido: req.body.fecha_pedido,
-        fecha_entrega: req.body.fecha_entrega
+        estado_entrega: req.body.estado_entrega
     }
 
     await pedidoModel.insertPedido(pedidoData,(error,data)=>{
