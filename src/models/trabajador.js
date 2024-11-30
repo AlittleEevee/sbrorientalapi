@@ -93,5 +93,24 @@ trabajador.deleteTrabajador = (id,callback) => {
     }
 }
 
+trabajador.getTrabajadorByPedidoId = (id,callback) => {
+    con = conection.conMysql();
+    if(con){
+        const _id = con.escape(id);
+        var sql = 'SELECT t.trabajador_id,t.nombre,t.telefono,t.correo,t.dni FROM trabajador t INNER JOIN pedido p WHERE t.trabajador_id = p.trabajador_id AND pedido_id = '+_id;
+        con.query(sql, (error,rows) => {
+            if(error){
+                throw error;
+            }else{
+                res = {
+                    status:"success",
+                    data:rows
+                }
+                callback(null,res);
+            }
+            conection.cerrarConexion();
+        });
+    }
+}
 
 module.exports = trabajador;

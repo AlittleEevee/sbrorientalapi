@@ -53,4 +53,11 @@ router.delete("/trabajador/:id", async (req,res) =>{
     })
 });
 
+router.get("/trabajador/pedido/:id", async (req,res) =>{
+    const { id } = req.params;
+    await trabajadorModel.getTrabajadorByPedidoId(id,(error,data)=>{
+        res.status(200).json(data);
+    })
+});
+
 module.exports = router;
